@@ -1,0 +1,8 @@
+[package]
+name = "pokeranalyzer"
+version = "0.1.0"
+authors = ["Tapac"]
+
+[dependencies]
+lazy_static = "0.1.15"
+bit-vec = "0.4.3"
