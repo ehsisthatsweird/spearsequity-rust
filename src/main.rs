@@ -81,4 +81,6 @@ fn main() {
     println!("{:#b}", state_table_eval::format_card_8bit((Card::new(Rank::Jack, Suit  ::Diamonds)).ordinal));
 
     println!("KEYS size: {:?}", unsafe {KEYS.len()});
+
+    println!("test");
 }
