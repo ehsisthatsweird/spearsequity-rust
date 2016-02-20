@@ -21,15 +21,51 @@ pub static mut KEYS: [i64; LOOKUP_TABLE_SEZE as usize] = [0; LOOKUP_TABLE_SEZE a
 
 
 pub fn insert_key(key: i64) -> i32 {
+    let mut result: i32 = 0;
+
     if key == 0 {
         return 0;
     }
 
-    if key >= MAX_KEY {
-        if key > MAX_KEY {
-            let n = NUM_KEYS
+    if key >= unsafe {MAX_KEY} {
+        if key > unsafe {MAX_KEY} {
+            unsafe {
+                KEYS[NUM_KEYS as usize] = key;
+                NUM_KEYS += 1;
+                MAX_KEY = key;
+            }
+        }
+        result = unsafe {NUM_KEYS - 1};
+        return result;
+    }
+
+    let mut low = -1;
+    let mut high = unsafe {NUM_KEYS};
+    let mut pivot: i32;
+    let mut difference: i64;
+
+    while (high - low) > 1 {
+        pivot = (low + high) >> 1;
+        difference = unsafe {KEYS[pivot as usize] - key};
+
+        if difference > 0 {
+            high = pivot;
+        } else if difference < 0 {
+            low = pivot;
+        } else {
+            return pivot; //key already exists
         }
     }
+
+    //key doesn't exist, insert key
+    unsafe {
+        //let length = NUM_KEYS - high;
+        //let to_copy =
+        KEYS[high as usize] = key;
+        NUM_KEYS += 1;
+    }
+
+    high
 }
 // 8-Bit Packed EquityRunner.Card Representation
 // +--------+
