@@ -58,9 +58,8 @@ pub fn insert_key(key: i64) -> i32 {
     }
 
     //key doesn't exist, insert key
+    //TODO: why copyarray in java?
     unsafe {
-        //let length = NUM_KEYS - high;
-        //let to_copy =
         KEYS[high as usize] = key;
         NUM_KEYS += 1;
     }
